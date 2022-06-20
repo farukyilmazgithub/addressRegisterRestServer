@@ -18,7 +18,7 @@ public class DistrictServiceImpl implements DistrictService {
 
     @Override
     public District findByDistrictId(Long districtId) {
-        return districtRepository.findByDistrictId(districtId);
+        return districtRepository.findById(districtId).get();
     }
 
     @Override

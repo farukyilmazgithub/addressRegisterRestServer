@@ -19,7 +19,7 @@ public class StreetServiceImpl implements StreetService {
 
     @Override
     public Street findByStreetId(Long streetId) {
-        return streetRepository.findByStreetId(streetId);
+        return streetRepository.findById(streetId).get();
     }
 
     @Override

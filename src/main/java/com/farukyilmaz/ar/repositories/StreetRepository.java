@@ -9,6 +9,5 @@ import java.util.ArrayList;
 
 @Repository
 public interface StreetRepository extends CrudRepository<Street,Long>, JpaRepository<Street,Long> {
-    Street findByStreetId(Long streetId);
     ArrayList<Street> findStreetByNeighborhood_NeighborhoodId(Long neighborhoodId);
 }

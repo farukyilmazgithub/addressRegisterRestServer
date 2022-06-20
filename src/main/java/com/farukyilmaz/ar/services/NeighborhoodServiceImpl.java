@@ -18,7 +18,7 @@ public class NeighborhoodServiceImpl implements NeighborhoodService {
 
     @Override
     public Neighborhood findByNeighborhoodId(Long neighborhoodId) {
-        return neighborhoodRepository.findByNeighborhoodId(neighborhoodId);
+        return neighborhoodRepository.findById(neighborhoodId).get();
     }
 
     @Override

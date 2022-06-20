@@ -9,6 +9,5 @@ import java.util.ArrayList;
 
 @Repository
 public interface DistrictRepository extends CrudRepository<District,Long>, JpaRepository<District,Long> {
-    District findByDistrictId(Long districtId);
     ArrayList<District> findDistrictByCity_CityId(Long cityId);
 }
