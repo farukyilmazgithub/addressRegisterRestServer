@@ -3,6 +3,8 @@ package com.farukyilmaz.ar.controllers;
 import com.farukyilmaz.ar.models.*;
 import com.farukyilmaz.ar.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -70,25 +72,42 @@ public class RestController {
     public Street getStreetByID(@PathVariable Long Id) {
         return streetService.findByStreetId(Id);
     }
+
     //address
     @RequestMapping(value = "/api/address", method = RequestMethod.GET)
-    public ArrayList<Address> getAddress() {
+    public ArrayList<Address> getAllAddress() {
         return addressService.getList();
     }
 
     @RequestMapping(value = "/api/address/{Id}", method = RequestMethod.GET)
-    public Address getAddressById(@PathVariable Long Id) {
-        return addressService.findById(Id);
+    public ResponseEntity getAddressById(@PathVariable Long Id) {
+        Address address = addressService.findById(Id);
+        if( address !=null) return new ResponseEntity<>(address, HttpStatus.OK);
+        else return ResponseEntity.notFound().build();
+
     }
 
     @RequestMapping(value = "/api/address", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
     public Address setAddress(@RequestBody Address address) {
         return addressService.save(address);
     }
 
-    @RequestMapping(value = "/api/address", method = RequestMethod.PUT)
-    public Address updateAddress(@RequestBody Address address){
-        return addressService.save(address);
+
+    @RequestMapping(value = "/api/address/{Id}" ,method = RequestMethod.PUT)
+    public ResponseEntity updateAddress(@PathVariable("Id") Long Id, @RequestBody Address updatedAddress){
+        try{
+            Address address;
+            address = addressService.findById(Id);
+            System.out.println(address.toString());
+            address = updatedAddress;
+            addressService.save(address);
+            return new ResponseEntity<>(updatedAddress, HttpStatus.OK);
+        }
+        catch (Exception e)
+        {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @RequestMapping(value = "/api/address/{Id}" ,method = RequestMethod.DELETE)

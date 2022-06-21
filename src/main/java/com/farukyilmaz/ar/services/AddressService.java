@@ -7,6 +7,6 @@ import java.util.ArrayList;
 public interface AddressService {
     ArrayList<Address> getList();
     Address findById(Long Id);
-    Address save (Address a);
-    void delete(Address a);
+    Address save(Address address);
+    void delete(Address address);
 }
