@@ -204,7 +204,7 @@ class ApApplicationTests {
     public void givenAddress_whenDeleteAddress_thenReturn200() throws Exception{
         // given - precondition or setup
         Address address = Address.builder().addressId(1L).city("City1").district("District1").neighborhood("Neighborhood1").street("Street1")
-                .addressLine1("Address line 1 1").addressLine2("Address line 2 1").description("Description1").build();
+                .addressLine1("Address line 1").addressLine2("Address line 2").description("Description1").build();
 
         willDoNothing().given(addressService).delete(address);
 
